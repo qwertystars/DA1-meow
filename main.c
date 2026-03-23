@@ -563,7 +563,7 @@ void gradeDistribution(void) {
  * ============================================================ */
 int main(void) {
     int choice;
-    setvbuf(stdout, NULL, _IONBF, 0); //For web-based IDEs that buffer output, this ensures immediate printing of printf statements.
+    
     /* Welcome banner */
     printf("============================================\n");
     printf("  Smart Student Performance Analyzer\n");
