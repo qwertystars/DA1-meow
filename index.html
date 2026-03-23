@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Smart Student Performance Analyzer</title>
+<style>
+body {
+  background: #1a1a2e;
+  font-family: monospace;
+  padding: 20px;
+  color: white;
+}
+h2 {
+  color: #00ff88;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+textarea#output {
+  width: 100%;
+  height: 450px;
+  background: #0a0a0a;
+  color: #00ff88;
+  font-size: 14px;
+  padding: 15px;
+  border: 1px solid #00ff88;
+  resize: none;
+  font-family: monospace;
+  display: block;
+  margin-bottom: 10px;
+}
+div#inputRow {
+  display: flex;
+  gap: 10px;
+}
+input#inputBox {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  font-family: monospace;
+  background: #0a0a0a;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+}
+button#sendBtn {
+  padding: 10px 25px;
+  background: #00ff88;
+  color: #000;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+<h2>Smart Student Performance Analyzer - Daksh Agarwal | 25BCE5098</h2>
+<textarea id="output" readonly></textarea>
+<div id="inputRow">
+  <input id="inputBox" type="text" placeholder="Type your input here and press Enter or click Send" autofocus/>
+  <button id="sendBtn" onclick="sendInput()">Send</button>
+</div>
+<script>
+  var pendingInput = null;
+  var outputEl = document.getElementById('output');
+  var inputEl = document.getElementById('inputBox');
+
+  inputEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { sendInput(); }
+  });
+
+  function sendInput() {
+    var val = inputEl.value;
+    inputEl.value = '';
+    outputEl.value += val + '\n';
+    outputEl.scrollTop = outputEl.scrollHeight;
+    if (pendingInput) {
+      pendingInput(val + '\n');
+      pendingInput = null;
+    }
+  }
+
+  var Module = {
+    preRun: [],
+    postRun: [],
+    print: function(text) {
+      outputEl.value += text + '\n';
+      outputEl.scrollTop = outputEl.scrollHeight;
+    },
+    printErr: function(text) {
+      outputEl.value += text + '\n';
+      outputEl.scrollTop = outputEl.scrollHeight;
+    },
+    stdin: function() {
+      return null;
+    },
+    noInitialRun: false
+  };
+</script>
+<script async type="text/javascript" src="index.js"></script>
+</body>
+</html>
